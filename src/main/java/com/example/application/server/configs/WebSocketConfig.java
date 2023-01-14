@@ -17,8 +17,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // Можно сократить до /server, тогда он будет коннектится(выполнять) со множеством методов, которые начинаются server
         // с помощью этой настройки можно скрывать админские панели, меню, кнопки
         // предоставляет доступ клиентскому приложению к методам сервера
-        config.enableSimpleBroker("/server/get/hello"); // будет вызван только greeting
-        // config.enableSimpleBroker("/server"); // будут вызваны все методы начинающиеся с /server
+        config.enableSimpleBroker("/server/get/hello"); // будет вызван только greeting с  @MessageMapping("/send/hello/name"). Клиент может обратиться только к этому методу
+        // config.enableSimpleBroker("/server"); // будут вызваны все методы начинающиеся с /server  @MessageMapping("/send/hello/name") или  @MessageMapping("/send/hello/admin"), сервер выполнит один из этих методов и отправит ответ клиенту, который вызвал этот метод. Клиент может обращатся к любому методу
         // config.setApplicationDestinationPrefixes("/prefix");                  // добавляет префикс для запроса от клиента вместо /send/hello/name будет /prefix/send/hello/name (в app.js)
     }
 

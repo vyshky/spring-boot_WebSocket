@@ -9,14 +9,14 @@ import org.springframework.web.util.HtmlUtils;
 
 @Controller
 public class GreetingController {
-    @MessageMapping("/send/hello/name")   // @MessageMapping мапится с config.setApplicationDestinationPrefixes("/client"); при этом в таком виде client/send/hello/name
-    @SendTo("/server/get/hello") // server мапиться с config.enableSimpleBroker("/server");
+    @MessageMapping("/send/hello/name")   // @MessageMapping мапится с config.setApplicationDestinationPrefixes("/prefix"); при этом в таком виде prefix/send/hello/name
+    @SendTo("/server/get/hello") // server мапиться с config.enableSimpleBroker("/server"); при этом он может смапится как /server или /server/get или /server/get/hello
     public Greeting greeting(HelloMessage message) throws Exception {
         Thread.sleep(1000); // simulated delay
         return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
     }
 
-    @MessageMapping("/send/hello/admin")   // @MessageMapping мапится с config.setApplicationDestinationPrefixes("/client"); при этом в таком виде client/send/hello/name
+    @MessageMapping("/send/hello/admin")   // @MessageMapping мапится с config.setApplicationDestinationPrefixes("/prefix"); при этом в таком виде prefix/send/hello/admin
     @SendTo("/server/get/admin") // server мапиться с config.enableSimpleBroker("/server");
     public Greeting greeting2(HelloMessage message) throws Exception {
         Thread.sleep(1000); // simulated delay
